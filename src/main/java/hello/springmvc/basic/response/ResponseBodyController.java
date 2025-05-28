@@ -14,6 +14,7 @@ import java.io.IOException;
 
 @Slf4j
 @Controller
+@ResponseBody
 public class ResponseBodyController {
 
     @GetMapping("/response-body-string-v1")
@@ -26,7 +27,7 @@ public class ResponseBodyController {
         return new ResponseEntity<>("responseBodyV2: OK", HttpStatus.OK);
     }
 
-    @ResponseBody
+    //@ResponseBody
     @GetMapping("/response-body-string-v3")
     public String responseBodyV3() {
         return "responseBodyV3: OK";
@@ -41,7 +42,7 @@ public class ResponseBodyController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @ResponseBody
+    //@ResponseBody
     @GetMapping("/response-body-json-v2")
     public HelloData responseJsonV2() {
         HelloData data = new HelloData();
