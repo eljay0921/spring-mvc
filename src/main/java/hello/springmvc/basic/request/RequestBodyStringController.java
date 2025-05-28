@@ -10,6 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,9 +40,24 @@ public class RequestBodyStringController {
     }
 
     @PostMapping("/request-body-string-v3")
-    public HttpEntity<String> requestBodyStringV3(HttpEntity<String> httpEntity) throws IOException {
+    public HttpEntity<String> requestBodyStringV3(HttpEntity<String> httpEntity) {
         log.info("requestBodyStringV3 : messageBody={}", httpEntity.getBody());
         //return new HttpEntity<>("OK");
         return new ResponseEntity<>("OK", HttpStatus.ACCEPTED);
+    }
+
+    @ResponseBody
+    @PostMapping("/request-body-string-v4")
+    public String requestBodyStringV4(@RequestBody String messageBody) {
+        log.info("requestBodyStringV4 : messageBody={}", messageBody);
+        return "OK";
+    }
+
+    @ResponseBody
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/request-body-string-v5")
+    public String requestBodyStringV5(@RequestBody String messageBody) {
+        log.info("requestBodyStringV5 : messageBody={}", messageBody);
+        return "OK (created)";
     }
 }
