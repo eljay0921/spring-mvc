@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -66,6 +67,13 @@ public class RequestParamController {
     public String requestParamDefault(@RequestParam(defaultValue = "guest") String username,
                                        @RequestParam(defaultValue = "-1") int age) {
         log.info("requestParamDefault : username={}, age={}", username, age);
+        return "OK";
+    }
+
+    @ResponseBody
+    @RequestMapping("/request-param-map")
+    public String requestParamMap(@RequestParam Map<String, Object> paramMap) {
+        log.info("requestParamMap : username={}, age={}", paramMap.get("username"), paramMap.get("age"));
         return "OK";
     }
 }
