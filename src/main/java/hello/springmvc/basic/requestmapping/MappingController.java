@@ -2,6 +2,7 @@ package hello.springmvc.basic.requestmapping;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -76,6 +77,22 @@ public class MappingController {
     @GetMapping(value = "/mapping-header", headers = "mode=debug")
     public String mappingHeader() {
         log.info("mappingHeader");
+        return "OK";
+    }
+
+    // 조건(Content-Type, 미디어 타입)에 따른 매핑
+    //@PostMapping(value = "/mapping-consume", consumes = "application/json")
+    @PostMapping(value = "/mapping-consume", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public String mappingConsume() {
+        log.info("mappingConsume");
+        return "OK";
+    }
+
+    // 조건(Accept, 미디어 타입)에 따른 매핑
+    //@PostMapping(value = "/mapping-produce", produces = "text/xml")
+    @PostMapping(value = "/mapping-produce", produces = MediaType.TEXT_XML_VALUE)
+    public String mappingProduce() {
+        log.info("mappingProduce");
         return "OK";
     }
 }
