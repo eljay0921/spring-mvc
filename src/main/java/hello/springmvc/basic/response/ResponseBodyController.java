@@ -5,16 +5,14 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 
 @Slf4j
-@Controller
-@ResponseBody
+@RestController  // @Controller와 @ResponseBody를 모두 포함한다.
 public class ResponseBodyController {
 
     @GetMapping("/response-body-string-v1")
@@ -27,7 +25,6 @@ public class ResponseBodyController {
         return new ResponseEntity<>("responseBodyV2: OK", HttpStatus.OK);
     }
 
-    //@ResponseBody
     @GetMapping("/response-body-string-v3")
     public String responseBodyV3() {
         return "responseBodyV3: OK";
@@ -42,7 +39,6 @@ public class ResponseBodyController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    //@ResponseBody
     @GetMapping("/response-body-json-v2")
     public HelloData responseJsonV2() {
         HelloData data = new HelloData();
